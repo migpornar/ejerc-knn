@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ejercicios APREST</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta name="description" content="Ejercicios sobre KNN">
+  <meta name="generator" content="bookdown 0.3 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Ejercicios APREST" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://github.com/migpornar/ejerc-knn" />
+  
+  <meta property="og:description" content="Ejercicios sobre KNN" />
+  <meta name="github-repo" content="migpornar/ejerc-r" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Ejercicios APREST" />
+  
+  <meta name="twitter:description" content="Ejercicios sobre KNN" />
+  
+
+<meta name="author" content="Miguel Ángel Porras">
+
+
+<meta name="date" content="2017-02-20">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="problema-de-regresion.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Ejercicios APREST</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introducción</a></li>
+<li class="chapter" data-level="1" data-path="problema-de-clasificacion.html"><a href="problema-de-clasificacion.html"><i class="fa fa-check"></i><b>1</b> Problema de clasificación</a><ul>
+<li class="chapter" data-level="1.1" data-path="problema-de-clasificacion.html"><a href="problema-de-clasificacion.html#pasos-previos"><i class="fa fa-check"></i><b>1.1</b> Pasos previos</a></li>
+<li class="chapter" data-level="1.2" data-path="problema-de-clasificacion.html"><a href="problema-de-clasificacion.html#conjunto-test-y-train"><i class="fa fa-check"></i><b>1.2</b> Conjunto Test y Train</a></li>
+<li class="chapter" data-level="1.3" data-path="problema-de-clasificacion.html"><a href="problema-de-clasificacion.html#knn-ponderado-con-validacion-cruzada."><i class="fa fa-check"></i><b>1.3</b> KNN ponderado con validación cruzada.</a></li>
+<li class="chapter" data-level="1.4" data-path="problema-de-clasificacion.html"><a href="problema-de-clasificacion.html#clasificiacion-del-conjunto-test."><i class="fa fa-check"></i><b>1.4</b> Clasificiación del conjunto test.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="problema-de-regresion.html"><a href="problema-de-regresion.html"><i class="fa fa-check"></i><b>2</b> Problema de regresión</a><ul>
+<li class="chapter" data-level="2.1" data-path="problema-de-regresion.html"><a href="problema-de-regresion.html#conjunto-test-y-train-1"><i class="fa fa-check"></i><b>2.1</b> Conjunto Test y Train</a></li>
+<li class="chapter" data-level="2.2" data-path="problema-de-regresion.html"><a href="problema-de-regresion.html#knn-ponderado-con-validacion-cruzada.-1"><i class="fa fa-check"></i><b>2.2</b> KNN ponderado con validación cruzada.</a></li>
+<li class="chapter" data-level="2.3" data-path="problema-de-regresion.html"><a href="problema-de-regresion.html#clasificiacion-del-conjunto-test.-1"><i class="fa fa-check"></i><b>2.3</b> Clasificiación del conjunto test.</a></li>
+<li class="chapter" data-level="2.4" data-path="problema-de-regresion.html"><a href="problema-de-regresion.html#knn-aleatorio"><i class="fa fa-check"></i><b>2.4</b> KNN aleatorio</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Ejercicios APREST</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="problema-de-clasificacion" class="section level1">
+<h1><span class="header-section-number">Ejercicio 1</span> Problema de clasificación</h1>
+<div id="pasos-previos" class="section level2">
+<h2><span class="header-section-number">1.1</span> Pasos previos</h2>
+<p>Para empezar, importamos nuestro archivo de datos <code>datawork.csv</code>.</p>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_double(),
+##   clasobj = col_character(),
+##   x30 = col_integer()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<p>Veamos una breve descripción del conjunto de datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(df)</code></pre></div>
+<pre><code>## # A tibble: 6 × 42
+##   clasobj varobj   x01   x02   x03   x04    x05   x06    x07    x08   x09
+##     &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1      CC  12.63  0.64  0.68 25.06 33.42 103.18  1.08  80.27  14.83 18.09
+## 2      AA  25.08  0.70  0.72 16.08 10.98  38.31  1.62  57.32  30.72 17.13
+## 3      DD  28.84  0.45  0.71 57.78 48.77 148.21  0.34 174.54  50.72  2.72
+## 4      AA  26.58  0.15  0.56 17.79 10.04  30.33  0.86  57.44 167.47 23.09
+## 5      BB  18.53  0.70  0.54 17.48 25.51  82.42  1.04  57.55  40.13  1.70
+## 6      CC  14.20  0.37  0.75 50.01 32.25  99.49  0.92 153.46   1.90  1.76
+## # ... with 31 more variables: x10 &lt;dbl&gt;, x11 &lt;dbl&gt;, x12 &lt;dbl&gt;, x13 &lt;dbl&gt;,
+## #   x14 &lt;dbl&gt;, x15 &lt;dbl&gt;, x16 &lt;dbl&gt;, x17 &lt;dbl&gt;, x18 &lt;dbl&gt;, x19 &lt;dbl&gt;,
+## #   x20 &lt;dbl&gt;, x21 &lt;dbl&gt;, x22 &lt;dbl&gt;, x23 &lt;dbl&gt;, x24 &lt;dbl&gt;, x25 &lt;dbl&gt;,
+## #   x26 &lt;dbl&gt;, x27 &lt;dbl&gt;, x28 &lt;dbl&gt;, x29 &lt;dbl&gt;, x30 &lt;int&gt;, x31 &lt;dbl&gt;,
+## #   x32 &lt;dbl&gt;, x33 &lt;dbl&gt;, x34 &lt;dbl&gt;, x35 &lt;dbl&gt;, x36 &lt;dbl&gt;, x37 &lt;dbl&gt;,
+## #   x38 &lt;dbl&gt;, x39 &lt;dbl&gt;, x40 &lt;dbl&gt;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)</code></pre></div>
+<pre><code>##    clasobj              varobj            x01              x02        
+##  Length:4000        Min.   : 10.49   Min.   :0.0700   Min.   :0.1300  
+##  Class :character   1st Qu.: 14.35   1st Qu.:0.4000   1st Qu.:0.5100  
+##  Mode  :character   Median : 19.34   Median :0.5000   Median :0.6000  
+##                     Mean   : 20.86   Mean   :0.4989   Mean   :0.5977  
+##                     3rd Qu.: 25.48   3rd Qu.:0.6000   3rd Qu.:0.7000  
+##                     Max.   :713.81   Max.   :0.9400   Max.   :0.9300  
+##       x03              x04             x05              x06       
+##  Min.   :  0.94   Min.   :-0.64   Min.   :  2.96   Min.   :0.080  
+##  1st Qu.: 15.55   1st Qu.:21.56   1st Qu.: 69.82   1st Qu.:0.660  
+##  Median : 25.98   Median :29.54   Median : 94.06   Median :0.940  
+##  Mean   : 30.42   Mean   :29.48   Mean   : 93.91   Mean   :1.015  
+##  3rd Qu.: 40.17   3rd Qu.:37.34   3rd Qu.:117.63   3rd Qu.:1.270  
+##  Max.   :166.17   Max.   :62.67   Max.   :194.56   Max.   :3.260  
+##       x07              x08                x09                x10         
+##  Min.   :  3.61   Min.   :    0.02   Min.   :   0.000   Min.   : 0.0000  
+##  1st Qu.: 51.86   1st Qu.:    5.58   1st Qu.:   1.147   1st Qu.: 0.1000  
+##  Median : 83.12   Median :   21.86   Median :   2.020   Median : 0.2500  
+##  Mean   : 96.34   Mean   :  162.95   Mean   :   4.502   Mean   : 0.4398  
+##  3rd Qu.:125.90   3rd Qu.:   80.82   3rd Qu.:   3.480   3rd Qu.: 0.5700  
+##  Max.   :502.70   Max.   :68676.15   Max.   :1097.640   Max.   :24.1800  
+##       x11               x12             x13             x14       
+##  Min.   :  0.490   Min.   :10.57   Min.   : 9.26   Min.   :10.21  
+##  1st Qu.:  2.158   1st Qu.:15.45   1st Qu.:15.45   1st Qu.:15.40  
+##  Median :  2.960   Median :17.66   Median :17.60   Median :17.65  
+##  Mean   :  4.197   Mean   :17.56   Mean   :17.58   Mean   :17.57  
+##  3rd Qu.:  4.152   3rd Qu.:19.70   3rd Qu.:19.70   3rd Qu.:19.69  
+##  Max.   :688.530   Max.   :25.16   Max.   :24.86   Max.   :24.64  
+##       x15             x16             x17             x18       
+##  Min.   :10.15   Min.   : 9.65   Min.   :10.13   Min.   :10.47  
+##  1st Qu.:15.42   1st Qu.:15.37   1st Qu.:15.46   1st Qu.:15.43  
+##  Median :17.58   Median :17.55   Median :17.60   Median :17.62  
+##  Mean   :17.55   Mean   :17.55   Mean   :17.57   Mean   :17.57  
+##  3rd Qu.:19.68   3rd Qu.:19.66   3rd Qu.:19.67   3rd Qu.:19.67  
+##  Max.   :24.73   Max.   :25.50   Max.   :25.15   Max.   :25.22  
+##       x19             x20             x21             x22       
+##  Min.   :10.06   Min.   :10.26   Min.   : 9.59   Min.   : 9.44  
+##  1st Qu.:15.44   1st Qu.:15.37   1st Qu.:15.45   1st Qu.:15.39  
+##  Median :17.61   Median :17.66   Median :17.58   Median :17.63  
+##  Mean   :17.58   Mean   :17.58   Mean   :17.54   Mean   :17.57  
+##  3rd Qu.:19.72   3rd Qu.:19.67   3rd Qu.:19.63   3rd Qu.:19.71  
+##  Max.   :25.08   Max.   :24.95   Max.   :25.09   Max.   :24.99  
+##       x23             x24             x25             x26       
+##  Min.   : 9.99   Min.   : 9.63   Min.   : 9.03   Min.   : 9.89  
+##  1st Qu.:15.47   1st Qu.:15.41   1st Qu.:15.44   1st Qu.:15.39  
+##  Median :17.59   Median :17.50   Median :17.64   Median :17.59  
+##  Mean   :17.57   Mean   :17.55   Mean   :17.55   Mean   :17.59  
+##  3rd Qu.:19.66   3rd Qu.:19.70   3rd Qu.:19.75   3rd Qu.:19.73  
+##  Max.   :25.29   Max.   :25.15   Max.   :24.95   Max.   :25.05  
+##       x27             x28             x29             x30       
+##  Min.   : 5.91   Min.   : 7.81   Min.   :0.020   Min.   :10.00  
+##  1st Qu.:15.23   1st Qu.:15.92   1st Qu.:0.250   1st Qu.:14.00  
+##  Median :17.74   Median :18.41   Median :0.360   Median :16.00  
+##  Mean   :17.78   Mean   :18.47   Mean   :0.375   Mean   :16.76  
+##  3rd Qu.:20.36   3rd Qu.:21.14   3rd Qu.:0.490   3rd Qu.:19.00  
+##  Max.   :47.94   Max.   :28.27   Max.   :0.920   Max.   :29.00  
+##       x31              x32              x33             x34        
+##  Min.   : 75.25   Min.   : 79.55   Min.   : 81.6   Min.   : 83.37  
+##  1st Qu.:119.00   1st Qu.:118.01   1st Qu.:118.2   1st Qu.:132.24  
+##  Median :135.91   Median :134.82   Median :135.5   Median :151.30  
+##  Mean   :135.30   Mean   :133.66   Mean   :134.2   Mean   :150.74  
+##  3rd Qu.:151.52   3rd Qu.:149.53   3rd Qu.:150.0   3rd Qu.:169.27  
+##  Max.   :191.41   Max.   :185.77   Max.   :189.7   Max.   :241.19  
+##       x35             x36              x37              x38       
+##  Min.   : 75.3   Min.   : 35.80   Min.   :-26.19   Min.   :203.3  
+##  1st Qu.:119.4   1st Qu.: 63.55   1st Qu.: 10.10   1st Qu.:326.0  
+##  Median :136.8   Median : 73.68   Median : 19.36   Median :374.3  
+##  Mean   :136.5   Mean   : 73.64   Mean   : 19.57   Mean   :372.6  
+##  3rd Qu.:154.4   3rd Qu.: 83.84   3rd Qu.: 28.77   3rd Qu.:418.2  
+##  Max.   :197.3   Max.   :110.56   Max.   :206.12   Max.   :534.5  
+##       x39             x40       
+##  Min.   :210.2   Min.   :226.3  
+##  1st Qu.:312.5   1st Qu.:349.1  
+##  Median :357.7   Median :398.4  
+##  Mean   :355.8   Mean   :397.5  
+##  3rd Qu.:397.9   3rd Qu.:446.0  
+##  Max.   :493.2   Max.   :553.8</code></pre>
+<p>Observamos que la primera columna la interpreta como un string. Transformemos esta columna a factores.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df$clasobj &lt;-<span class="st"> </span><span class="kw">as.factor</span>(df$clasobj)</code></pre></div>
+<p>Comprobamos que ha leido bien los datos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(df)</code></pre></div>
+<pre><code>##  clasobj       varobj            x01              x02        
+##  AA: 626   Min.   : 10.49   Min.   :0.0700   Min.   :0.1300  
+##  BB:1315   1st Qu.: 14.35   1st Qu.:0.4000   1st Qu.:0.5100  
+##  CC:1372   Median : 19.34   Median :0.5000   Median :0.6000  
+##  DD: 687   Mean   : 20.86   Mean   :0.4989   Mean   :0.5977  
+##            3rd Qu.: 25.48   3rd Qu.:0.6000   3rd Qu.:0.7000  
+##            Max.   :713.81   Max.   :0.9400   Max.   :0.9300  
+##       x03              x04             x05              x06       
+##  Min.   :  0.94   Min.   :-0.64   Min.   :  2.96   Min.   :0.080  
+##  1st Qu.: 15.55   1st Qu.:21.56   1st Qu.: 69.82   1st Qu.:0.660  
+##  Median : 25.98   Median :29.54   Median : 94.06   Median :0.940  
+##  Mean   : 30.42   Mean   :29.48   Mean   : 93.91   Mean   :1.015  
+##  3rd Qu.: 40.17   3rd Qu.:37.34   3rd Qu.:117.63   3rd Qu.:1.270  
+##  Max.   :166.17   Max.   :62.67   Max.   :194.56   Max.   :3.260  
+##       x07              x08                x09                x10         
+##  Min.   :  3.61   Min.   :    0.02   Min.   :   0.000   Min.   : 0.0000  
+##  1st Qu.: 51.86   1st Qu.:    5.58   1st Qu.:   1.147   1st Qu.: 0.1000  
+##  Median : 83.12   Median :   21.86   Median :   2.020   Median : 0.2500  
+##  Mean   : 96.34   Mean   :  162.95   Mean   :   4.502   Mean   : 0.4398  
+##  3rd Qu.:125.90   3rd Qu.:   80.82   3rd Qu.:   3.480   3rd Qu.: 0.5700  
+##  Max.   :502.70   Max.   :68676.15   Max.   :1097.640   Max.   :24.1800  
+##       x11               x12             x13             x14       
+##  Min.   :  0.490   Min.   :10.57   Min.   : 9.26   Min.   :10.21  
+##  1st Qu.:  2.158   1st Qu.:15.45   1st Qu.:15.45   1st Qu.:15.40  
+##  Median :  2.960   Median :17.66   Median :17.60   Median :17.65  
+##  Mean   :  4.197   Mean   :17.56   Mean   :17.58   Mean   :17.57  
+##  3rd Qu.:  4.152   3rd Qu.:19.70   3rd Qu.:19.70   3rd Qu.:19.69  
+##  Max.   :688.530   Max.   :25.16   Max.   :24.86   Max.   :24.64  
+##       x15             x16             x17             x18       
+##  Min.   :10.15   Min.   : 9.65   Min.   :10.13   Min.   :10.47  
+##  1st Qu.:15.42   1st Qu.:15.37   1st Qu.:15.46   1st Qu.:15.43  
+##  Median :17.58   Median :17.55   Median :17.60   Median :17.62  
+##  Mean   :17.55   Mean   :17.55   Mean   :17.57   Mean   :17.57  
+##  3rd Qu.:19.68   3rd Qu.:19.66   3rd Qu.:19.67   3rd Qu.:19.67  
+##  Max.   :24.73   Max.   :25.50   Max.   :25.15   Max.   :25.22  
+##       x19             x20             x21             x22       
+##  Min.   :10.06   Min.   :10.26   Min.   : 9.59   Min.   : 9.44  
+##  1st Qu.:15.44   1st Qu.:15.37   1st Qu.:15.45   1st Qu.:15.39  
+##  Median :17.61   Median :17.66   Median :17.58   Median :17.63  
+##  Mean   :17.58   Mean   :17.58   Mean   :17.54   Mean   :17.57  
+##  3rd Qu.:19.72   3rd Qu.:19.67   3rd Qu.:19.63   3rd Qu.:19.71  
+##  Max.   :25.08   Max.   :24.95   Max.   :25.09   Max.   :24.99  
+##       x23             x24             x25             x26       
+##  Min.   : 9.99   Min.   : 9.63   Min.   : 9.03   Min.   : 9.89  
+##  1st Qu.:15.47   1st Qu.:15.41   1st Qu.:15.44   1st Qu.:15.39  
+##  Median :17.59   Median :17.50   Median :17.64   Median :17.59  
+##  Mean   :17.57   Mean   :17.55   Mean   :17.55   Mean   :17.59  
+##  3rd Qu.:19.66   3rd Qu.:19.70   3rd Qu.:19.75   3rd Qu.:19.73  
+##  Max.   :25.29   Max.   :25.15   Max.   :24.95   Max.   :25.05  
+##       x27             x28             x29             x30       
+##  Min.   : 5.91   Min.   : 7.81   Min.   :0.020   Min.   :10.00  
+##  1st Qu.:15.23   1st Qu.:15.92   1st Qu.:0.250   1st Qu.:14.00  
+##  Median :17.74   Median :18.41   Median :0.360   Median :16.00  
+##  Mean   :17.78   Mean   :18.47   Mean   :0.375   Mean   :16.76  
+##  3rd Qu.:20.36   3rd Qu.:21.14   3rd Qu.:0.490   3rd Qu.:19.00  
+##  Max.   :47.94   Max.   :28.27   Max.   :0.920   Max.   :29.00  
+##       x31              x32              x33             x34        
+##  Min.   : 75.25   Min.   : 79.55   Min.   : 81.6   Min.   : 83.37  
+##  1st Qu.:119.00   1st Qu.:118.01   1st Qu.:118.2   1st Qu.:132.24  
+##  Median :135.91   Median :134.82   Median :135.5   Median :151.30  
+##  Mean   :135.30   Mean   :133.66   Mean   :134.2   Mean   :150.74  
+##  3rd Qu.:151.52   3rd Qu.:149.53   3rd Qu.:150.0   3rd Qu.:169.27  
+##  Max.   :191.41   Max.   :185.77   Max.   :189.7   Max.   :241.19  
+##       x35             x36              x37              x38       
+##  Min.   : 75.3   Min.   : 35.80   Min.   :-26.19   Min.   :203.3  
+##  1st Qu.:119.4   1st Qu.: 63.55   1st Qu.: 10.10   1st Qu.:326.0  
+##  Median :136.8   Median : 73.68   Median : 19.36   Median :374.3  
+##  Mean   :136.5   Mean   : 73.64   Mean   : 19.57   Mean   :372.6  
+##  3rd Qu.:154.4   3rd Qu.: 83.84   3rd Qu.: 28.77   3rd Qu.:418.2  
+##  Max.   :197.3   Max.   :110.56   Max.   :206.12   Max.   :534.5  
+##       x39             x40       
+##  Min.   :210.2   Min.   :226.3  
+##  1st Qu.:312.5   1st Qu.:349.1  
+##  Median :357.7   Median :398.4  
+##  Mean   :355.8   Mean   :397.5  
+##  3rd Qu.:397.9   3rd Qu.:446.0  
+##  Max.   :493.2   Max.   :553.8</code></pre>
+<p>Por último veamos cuantos datos tenemos.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(df)</code></pre></div>
+<pre><code>## [1] 4000   42</code></pre>
+</div>
+<div id="conjunto-test-y-train" class="section level2">
+<h2><span class="header-section-number">1.2</span> Conjunto Test y Train</h2>
+<p>Fijamos una semilla para trabajar.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">2017</span>)</code></pre></div>
+<p>Seleccionamos los datos, los normalizamos, y los guardamos en las variables <code>df.train</code> y <code>df.test</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rknn)</code></pre></div>
+<pre><code>## Loading required package: gmp</code></pre>
+<pre><code>## 
+## Attaching package: &#39;gmp&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     %*%, apply, crossprod, matrix, tcrossprod</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n &lt;-<span class="st"> </span><span class="kw">dim</span>(df)[<span class="dv">1</span>]
+val &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span>:n, <span class="dt">size =</span> <span class="kw">round</span>(n/<span class="dv">3</span>), <span class="dt">replace =</span> <span class="ot">FALSE</span>, <span class="dt">prob =</span> <span class="kw">rep</span>(<span class="dv">1</span>/n, n))
+
+df.train &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">clasobj=</span>df$clasobj[-val], <span class="dt">varobj=</span>df$varobj[-val], <span class="kw">normalize.unit</span>(df[-val,<span class="kw">c</span>(-<span class="dv">1</span>,-<span class="dv">2</span>)]))
+df.test &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">clasobj=</span>df$clasobj[val], <span class="dt">varobj=</span>df$varobj[val], <span class="kw">normalize.unit</span>(df[val,<span class="kw">c</span>(-<span class="dv">1</span>,-<span class="dv">2</span>)]))</code></pre></div>
+</div>
+<div id="knn-ponderado-con-validacion-cruzada." class="section level2">
+<h2><span class="header-section-number">1.3</span> KNN ponderado con validación cruzada.</h2>
+<p>Usamos la función <code>train.kknn</code> de la librería <code>kknn</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(kknn)
+(fit.train1 &lt;-<span class="st"> </span><span class="kw">train.kknn</span>(clasobj ~<span class="st"> </span>., df.train[,-<span class="dv">2</span>], <span class="dt">kmax =</span> <span class="dv">20</span>,
+                          <span class="dt">kernel =</span> <span class="kw">c</span>(<span class="st">&quot;triangular&quot;</span>, <span class="st">&quot;rectangular&quot;</span>, <span class="st">&quot;epanechnikov&quot;</span>, <span class="st">&quot;optimal&quot;</span>,
+                                     <span class="st">&quot;gaussian&quot;</span>, <span class="st">&quot;rank&quot;</span>,<span class="st">&quot;inv&quot;</span>),  
+                          <span class="dt">distance =</span> <span class="dv">2</span>))</code></pre></div>
+<pre><code>## 
+## Call:
+## train.kknn(formula = clasobj ~ ., data = df.train[, -2], kmax = 20,     distance = 2, kernel = c(&quot;triangular&quot;, &quot;rectangular&quot;, &quot;epanechnikov&quot;,         &quot;optimal&quot;, &quot;gaussian&quot;, &quot;rank&quot;, &quot;inv&quot;))
+## 
+## Type of response variable: nominal
+## Minimal misclassification: 0.01574803
+## Best kernel: triangular
+## Best k: 13</code></pre>
+<p>Nos dice que el mejor kernel es el rectangular con <code>k</code> igual a 4.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.train1$best.parameters </code></pre></div>
+<pre><code>## $kernel
+## [1] &quot;triangular&quot;
+## 
+## $k
+## [1] 13</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.train1$response      </code></pre></div>
+<pre><code>## [1] &quot;nominal&quot;</code></pre>
+<p>Veamos una representación de los kernels respecto los <code>k</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit.train1)</code></pre></div>
+<p><img src="01-clasificacion_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="clasificiacion-del-conjunto-test." class="section level2">
+<h2><span class="header-section-number">1.4</span> Clasificiación del conjunto test.</h2>
+<p>Las predicciones para <code>df.test</code> son las siguientes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(df.pred1 &lt;-<span class="kw">predict</span>(fit.train1, df.test[,-<span class="dv">2</span>]))</code></pre></div>
+<pre><code>##    [1] CC CC AA CC BB DD BB BB CC AA DD CC AA AA CC CC BB CC CC DD BB BB CC
+##   [24] AA CC DD BB CC DD CC CC BB AA CC CC CC BB CC DD BB DD CC BB CC CC BB
+##   [47] CC AA BB AA BB BB BB CC CC DD BB AA CC DD BB CC CC CC CC BB CC AA CC
+##   [70] CC BB DD BB CC DD CC BB CC CC CC BB AA BB CC CC CC BB CC BB BB BB DD
+##   [93] AA DD AA CC CC AA DD DD CC BB AA BB CC BB DD AA DD CC BB CC DD CC CC
+##  [116] AA DD CC BB BB AA CC BB DD CC AA CC AA CC BB CC BB DD BB DD BB BB CC
+##  [139] DD BB DD BB BB AA DD DD BB BB BB DD CC CC CC BB BB CC BB CC CC AA DD
+##  [162] CC DD BB CC BB BB CC BB CC BB AA BB DD BB DD CC CC BB BB AA AA BB CC
+##  [185] BB DD BB BB CC BB AA AA BB AA BB DD BB BB BB CC CC BB BB CC CC BB BB
+##  [208] CC CC BB BB BB CC DD DD CC CC BB CC CC CC BB AA BB CC BB BB DD CC DD
+##  [231] BB CC BB CC CC BB BB BB BB CC AA CC BB BB BB CC BB CC BB BB DD BB CC
+##  [254] BB CC CC CC AA BB CC CC BB CC BB BB DD BB DD CC AA BB BB BB AA CC CC
+##  [277] AA CC BB CC DD BB DD CC BB DD CC AA BB DD CC CC BB CC CC DD CC DD BB
+##  [300] DD BB BB CC AA AA BB BB DD BB BB CC CC BB BB BB CC CC AA BB BB CC BB
+##  [323] CC CC DD CC BB AA BB DD AA CC AA DD BB BB AA BB CC BB CC CC CC AA BB
+##  [346] DD BB CC AA CC CC AA CC AA CC AA DD CC BB AA DD DD CC DD DD BB CC BB
+##  [369] AA BB CC AA CC AA AA AA CC CC CC CC BB DD CC BB CC AA CC AA CC CC BB
+##  [392] CC BB BB CC DD CC BB CC BB DD CC DD AA BB CC CC CC DD BB BB CC CC DD
+##  [415] AA AA BB BB DD AA BB CC CC CC CC AA DD CC CC BB DD BB BB BB BB BB AA
+##  [438] BB DD BB CC BB BB BB BB BB BB CC CC CC BB BB AA AA DD BB DD BB BB CC
+##  [461] CC CC BB CC BB BB BB CC CC CC AA AA AA BB DD CC BB AA CC BB BB CC BB
+##  [484] AA DD CC BB AA CC BB AA DD AA DD AA BB CC BB DD AA CC AA BB BB AA CC
+##  [507] AA CC AA BB BB DD AA CC CC BB BB CC CC BB DD DD AA CC DD BB CC CC CC
+##  [530] CC BB AA CC AA BB BB CC CC BB BB BB BB AA AA CC BB AA AA BB DD AA AA
+##  [553] BB DD AA DD AA BB AA BB BB CC CC CC CC BB AA DD AA AA BB BB BB BB CC
+##  [576] AA BB CC BB BB CC BB CC DD DD CC AA BB BB BB AA BB BB BB CC DD BB DD
+##  [599] CC CC AA CC BB BB BB CC DD BB BB BB AA BB DD CC AA DD DD DD BB AA CC
+##  [622] BB DD BB BB BB DD DD BB CC BB BB BB CC CC AA BB DD BB CC CC CC BB BB
+##  [645] DD DD AA CC BB CC AA CC BB CC BB CC AA DD CC BB DD BB CC BB BB CC BB
+##  [668] BB CC CC BB BB DD CC AA CC BB CC BB CC AA CC CC BB BB CC AA BB BB BB
+##  [691] BB CC BB BB AA CC AA CC CC DD CC DD CC DD CC AA DD CC CC DD CC CC CC
+##  [714] BB CC CC BB BB BB CC CC CC CC CC AA BB AA CC BB BB BB DD BB CC AA BB
+##  [737] CC BB CC CC DD CC BB CC BB BB CC AA AA DD DD AA BB AA BB BB CC AA CC
+##  [760] DD BB CC DD BB CC CC DD CC AA DD CC BB AA AA CC DD BB DD BB CC CC DD
+##  [783] BB BB BB CC BB CC CC BB AA BB BB CC BB CC CC BB BB CC BB BB CC DD DD
+##  [806] AA CC DD CC CC CC BB AA BB BB CC CC BB CC BB AA BB BB CC BB DD CC BB
+##  [829] CC DD DD DD CC AA BB CC BB CC CC CC BB DD DD BB CC CC CC CC BB DD BB
+##  [852] BB CC DD BB AA DD DD AA BB DD CC BB BB AA DD DD CC BB AA BB AA BB CC
+##  [875] CC BB DD DD DD DD DD AA CC BB CC AA DD BB BB AA AA BB CC CC DD CC BB
+##  [898] CC CC CC AA CC BB CC CC CC CC DD BB DD BB BB DD BB CC DD CC CC CC BB
+##  [921] AA BB BB BB DD AA CC CC AA DD AA AA CC CC BB CC CC BB DD CC BB AA AA
+##  [944] DD BB CC BB DD BB BB BB BB CC BB AA BB BB BB AA CC CC BB CC AA CC BB
+##  [967] BB BB BB CC CC CC CC CC CC AA BB AA DD CC CC CC BB CC AA DD AA AA BB
+##  [990] BB BB BB AA BB CC BB BB CC CC DD CC BB AA BB BB BB DD CC BB AA BB BB
+## [1013] BB CC DD CC BB BB DD CC BB BB BB BB BB DD CC CC DD DD DD CC CC BB AA
+## [1036] CC BB AA DD DD CC BB AA BB CC BB CC AA CC AA CC AA CC DD CC CC DD CC
+## [1059] CC BB CC DD CC CC BB BB AA AA BB BB CC AA CC DD DD CC AA AA BB AA BB
+## [1082] CC BB BB BB CC BB DD BB AA BB AA DD DD DD DD AA AA CC BB DD BB BB DD
+## [1105] DD CC AA DD CC BB BB DD BB BB CC CC BB AA BB CC AA CC BB DD DD AA CC
+## [1128] AA DD BB AA BB DD BB CC CC CC BB CC DD BB BB BB CC BB AA CC CC BB DD
+## [1151] DD AA AA AA AA CC BB CC AA CC DD BB DD BB CC CC CC CC AA AA AA BB AA
+## [1174] AA CC DD CC DD BB DD CC BB CC CC DD CC DD BB DD BB CC DD BB CC AA BB
+## [1197] CC CC BB BB AA CC CC BB CC DD CC BB CC CC CC DD CC DD AA AA CC BB CC
+## [1220] BB DD BB BB AA BB CC CC AA DD CC BB BB CC AA CC DD DD BB BB CC CC BB
+## [1243] DD AA BB DD DD BB BB DD CC DD DD BB BB BB BB BB DD BB CC DD DD DD BB
+## [1266] DD CC CC DD CC BB DD BB CC AA BB DD DD BB AA DD BB BB DD AA BB DD CC
+## [1289] BB CC AA DD CC BB CC BB CC CC AA AA BB BB DD CC AA BB CC BB DD BB BB
+## [1312] BB BB CC BB AA BB BB CC CC CC BB DD CC AA DD AA DD AA CC BB BB DD
+## Levels: AA BB CC DD</code></pre>
+<p>Veamos como de bueno es el modelo con la matriz de confusión.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(table.conf &lt;-<span class="st"> </span><span class="kw">table</span>(df.pred1, df.test$clasobj))</code></pre></div>
+<pre><code>##         
+## df.pred1  AA  BB  CC  DD
+##       AA 201   1   0   4
+##       BB   1 452   9   2
+##       CC   0   3 435   2
+##       DD   1   1   1 220</code></pre>
+<p>La tasa de error para el conjunto test es,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">(table.conf[<span class="dv">1</span>,<span class="dv">2</span>] +<span class="st"> </span>table.conf[<span class="dv">1</span>,<span class="dv">3</span>] +<span class="st"> </span>table.conf[<span class="dv">1</span>,<span class="dv">4</span>] +<span class="st"> </span>table.conf[<span class="dv">2</span>,<span class="dv">1</span>] +<span class="st"> </span>table.conf[<span class="dv">2</span>,<span class="dv">3</span>] +<span class="st"> </span>table.conf[<span class="dv">2</span>,<span class="dv">4</span>] +<span class="st"> </span>table.conf[<span class="dv">3</span>,<span class="dv">1</span>] +<span class="st"> </span>table.conf[<span class="dv">3</span>,<span class="dv">2</span>] +<span class="st"> </span>table.conf[<span class="dv">3</span>,<span class="dv">4</span>] +<span class="st"> </span>table.conf[<span class="dv">4</span>,<span class="dv">1</span>] +<span class="st"> </span>table.conf[<span class="dv">4</span>,<span class="dv">2</span>] +<span class="st"> </span>table.conf[<span class="dv">4</span>,<span class="dv">3</span>]) /<span class="st"> </span><span class="kw">dim</span>(df.test)[<span class="dv">1</span>]</code></pre></div>
+<pre><code>## [1] 0.01875469</code></pre>
+<p>Observamos que la proporción de error es muy pequeña.</p>
+<p>El error de clasificación para el caso óptimo es,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit.train1$MISCLASS[fit.train1$best.parameters$k,fit.train1$best.parameters$kernel]</code></pre></div>
+<pre><code>## [1] 0.01574803</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="problema-de-regresion.html" class="navigation navigation-next " aria-label="Next page""><i class="fa fa-angle-right"></i></a>
+
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

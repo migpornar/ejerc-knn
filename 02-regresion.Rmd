@@ -1,0 +1,114 @@
+---
+title: "02 - Regresion"
+author: "Miguel Ángel Porras Naranjo"
+date: "20 de febrero de 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Problema de regresión
+
+## Conjunto Test y Train
+
+Fijamos una semilla para trabajar.
+
+```{r}
+set.seed(2017)
+```
+
+Seleccionamos los datos, los normalizamos, y los guardamos en las variables `df.train` y `df.test`.
+
+```{r}
+library(readr)
+library(rknn)
+df <- read_delim("datawork.csv", ";", escape_double = FALSE, trim_ws = TRUE)
+n <- dim(df)[1]
+val <- sample(1:n, size = round(n/3), replace = FALSE, prob = rep(1/n, n))
+
+df.train <- data.frame(clasobj=df$clasobj[-val], varobj=df$varobj[-val], normalize.unit(df[-val,c(-1,-2)]))
+df.test <- data.frame(clasobj=df$clasobj[val], varobj=df$varobj[val], normalize.unit(df[val,c(-1,-2)]))
+```
+
+## KNN ponderado con validación cruzada.
+
+Usamos la función `train.kknn` de la librería `kknn`.
+
+```{r}
+library(kknn)
+set.seed(2017)
+(fit.train2 <- train.kknn(varobj ~ ., df.train[,-1], kmax = 20,
+                          kernel = c("triangular", "rectangular", "epanechnikov", "optimal",
+                                     "gaussian", "rank","inv"),  
+                          distance = 2))
+```
+
+Nos dice que el mejor kernel es el optimal con `k` igual a 4.
+
+```{r}
+fit.train2$best.parameters 
+fit.train2$response      
+```
+
+Veamos una representación de los kernels respecto los `k`.
+
+```{r}
+plot(fit.train2)
+```
+
+## Clasificiación del conjunto test.
+
+Las predicciones para `df.test` son las siguientes.
+
+```{r}
+(df.pred2 <-predict(fit.train2, df.test[,-2]))
+```
+
+El error cuadrático medio para el caso óptimo es,
+
+```{r}
+library(zoo)
+library(hydroGOF)
+rmse(df.pred2, df.test$varobj)
+```
+
+## KNN aleatorio
+
+Primero vamos a calcular el número de clasificadores óptimo.
+
+```{r}
+(p=ncol(df.train)-2)
+m=20 #Tomamos 20 variables
+(rnc=r(p,m,eta=0.9,method="poisson"))
+```
+
+Aplicamos la técnica KNN aleatorio con r = 5
+
+```{r}
+fit.train3 = rknn(data=df.train[,-1], newdata= df.test[,-1],y=df.train$varobj, k = 4, r=5, mtry = m)
+```
+
+Veamos las características de este KNN aleatorio,
+
+```{r}
+(df.pred3 = as.numeric(paste(fit.train3$pred)))
+```
+
+Calculamos el error cuadrático medio para esta predicción,
+
+```{r}
+library(zoo)
+library(hydroGOF)
+rmse(df.pred3, df.test$varobj)
+```
+
+El valor del error cuadrático medio usando el método anterior era,
+
+```{r}
+rmse(df.pred2, df.test$varobj)
+```
+
+Concluimos que el modelo basado en un KNN ponderado es mejor que el aleatorio, al menos para la semilla que consideramos al comienzo. Sin embargo el aleatorio se ejecuta mucho mas rápido que el poderado. Podriamos pensar si este tiempo de ejecución adiccional merece la pena comparando los errores resultantes.
+
