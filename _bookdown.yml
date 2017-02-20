@@ -1,5 +1,6 @@
 book_filename: "bookdown-start"
 chapter_name: "Ejercicio "
 output_dir: docs
+rmd_files: ["index.Rmd", "01-clasificacion.Rmd", "02-regresion.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
